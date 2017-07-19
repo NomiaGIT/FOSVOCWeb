@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:composition template="/templates/default/main.xhtml">
+
+	<ui:define name="content">
+		<p:growl id="growl" showDetail="true" life="3000" redisplay="false" />
+
+		<div class="container">
+			<div class="row">
+				<h3></h3>
+				<div class="col-lg-12">
+					<h:panelGroup rendered="#{sessionScope.tipoUsuario != null }">
+						<h3 class="page-header">
+							<h:outputText id="inicio" styleClass="text-primary"
+								value=" BIENVENIDO, #{sessionScope.sessionUsuario}" />
+							<h:message for="inicio" styleClass="error" />
+						</h3>
+					</h:panelGroup>
+
+				</div>
+			</div>
+
+			<div class="row">
+				<h:panelGroup
+					rendered="#{sessionScope.tipoUsuario.equalsIgnoreCase('Aportante')}">
+					<div class="col-lg-12">
+						<div class="panel panel-primary">
+
+							<div class="panel-heading">Portal de Autogestión</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body" id="main">
+								<!-- Nav tabs -->
+								<ul class="nav nav-tabs">
+									<li class="active"><a href="#iniciotab" data-toggle="tab">Autogestión</a></li>
+									<li><a href="#perfil" data-toggle="tab">Datos
+											personales</a></li>
+									<li><a href="#prestamos" data-toggle="tab">Préstamos</a></li>
+									<li><a href="#contacto" data-toggle="tab">Contacto</a></li>
+								</ul>
+
+								<!-- Tab panes -->
+								<div class="tab-content">
+									<div class="tab-pane fade in active" id="iniciotab">
+										<h3></h3>
+										<div class="row">
+											<div class="col-lg-12 ">
+												<div class="panel panel-info">
+													<div>
+														<h:outputText
+															value="A través de las opciones usted podrá consultar información sobre sus préstamos. " />
+														<a href="#prestamos" data-toggle="tab"><i
+															class="fa fa-info fa-fw" aria-hidden="true"></i></a>
+													</div>
+													<div>
+														<h:outputText
+															value="Consultar y confirmar sus datos personales. " />
+														<a href="#perfil" data-toggle="tab"><i
+															class="fa fa-user-o fa-fw" aria-hidden="true"></i></a>
+													</div>
+													<div>
+														<h:outputText
+															value="Enviar un mensaje a la administración del Fondo de vivienda. " />
+														<a href="#contacto" data-toggle="tab"><i
+															class="fa fa-envelope-o fa-fw" aria-hidden="true"></i></a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- Inicio panel de informacion personal -->
+									<div class="tab-pane fade" id="perfil">
+										<h3></h3>
+										<div class="row">
+											<div class="col-lg-12 ">
+												<div class="panel panel-info">
+													<div class="panel-heading">Detalle</div>
+													<div class="panel-body">
+														<div class="col-lg-6">
+															<div class="form-group">
+																<label>Nombre</label> <input class="form-control"
+																	value="#{aportanteBean.nombre}" readonly="readonly" />
+															</div>
+															<div class="form-group">
+																<label>Documento</label> <input class="form-control"
+																	value="#{aportanteBean.id}" readonly="readonly" />
+															</div>
+															<div class="form-group">
+																<label>E-Mail</label> <input class="form-control"
+																	value="#{aportanteBean.email}" readonly="readonly" />
+															</div>
+															<div class="form-group">
+																<label>Direccion</label> <input class="form-control"
+																	value="#{aportanteBean.domicilio}" readonly="readonly" />
+															</div>
+															<div class="form-group">
+																<label>Nacionalidad</label> <input class="form-control"
+																	value="#{aportanteBean.nacionalidad}"
+																	readonly="readonly" />
+															</div>
+														</div>
+														<div class="col-lg-6">
+															<div class="form-group">
+																<label>Apellido</label> <input class="form-control"
+																	value="#{aportanteBean.apellido}" readonly="readonly" />
+															</div>
+															<div class="form-group">
+																<label>Perfil</label> <input class="form-control"
+																	value="#{aportanteBean.tipo}" readonly="readonly" />
+															</div>
+															<div class="form-group">
+																<label>Fecha nacimiento</label> <input
+																	class="form-control"
+																	value="#{aportanteBean.fechaNacimiento}"
+																	readonly="readonly" />
+															</div>
+															<div class="form-group">
+																<label>Teléfono</label> <input class="form-control"
+																	value="#{aportanteBean.telefono}" readonly="readonly" />
+															</div>
+														</div>
+
+													</div>
+													<div align="center">
+														<h:outputLabel name="msge1"
+															value="Si alguno de los datos es incorrecto o está desactualizado, por favor envie un mensaje solicitando el cambio a través de la opción "
+															id="entrarlbl1"
+															style="font-style:italic;font-weight:regular;color:#003366;" />
+														<a href="#contacto" data-toggle="tab"><i
+															class="fa fa-envelope-o fa-fw" aria-hidden="true"></i>
+															Contacto</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="prestamos">
+										<h5 class="text-primary">
+											Datos actualizados al día de hoy,
+											<h:outputText styleClass="text-primary"
+												value="#{session.lastAccessedTime}">
+												<f:convertDateTime dateStyle="full" type="date" />
+											</h:outputText>
+										</h5>
+
+										<div class="alert alert-info">
+											<h:outputText value="Solicitudes pendientes" />
+										</div>
+										<div class="row">
+											<div>
+												<div class="thumbnail">
+													<i class="fa fa-address-card-o" aria-hidden="true"></i>
+													<div class="caption">
+														<div>
+															<h:outputText
+																value=" Tours: #{tourDelDiaFilterView.datosTourDelDia.get(0).cuantos} para #{tourDelDiaFilterView.datosTourDelDia.get(0).destino}"
+																rendered="#{tourDelDiaFilterView.datosTourDelDia.get(0).cuantos &gt;0}" />
+															<h:outputText value=" No hay solicitudes pendientes "
+																rendered="#{solicitudesFilterView.datosSolicitudDeAportante.cuantas == 0}" />
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="alert alert-info">
+											<h:outputText value="Adjudicaciones activas" />
+										</div>
+
+									</div>
+									<div class="tab-pane fade" id="contacto">
+										<h3></h3>
+										<div class="row">
+											<div class="col-lg-12 ">
+												<div class="panel panel-info">
+													<div class="panel-heading">Complete los siguientes
+														datos:</div>
+													<div class="panel-body">
+														<p>
+															<h:form role="form">
+																<div class="form-group">
+																	<label>Asunto:</label>
+																	<h:inputText class="form-control"
+																		pt:placeholder="Asunto" name="Asunto"
+																		value="#{emailBean.asunto}" id="asunto" label="Asunto">
+																	</h:inputText>
+																</div>
+																<div>
+																	<h:message styleClass="btn-sm btn-danger btn-block"
+																		for="asunto" name="msgc" id="msj1"></h:message>
+																</div>
+																<div class="form-group">
+																	<label>Texto:</label>
+																	<h:inputTextarea  
+																		value="#{emailBean.textomensaje}" required="true"
+																		id="texto" class="form-control"
+																		requiredMessage="Por favor ingrese el texto del mensaje"
+																		validatorMessage="El mensaje debe contener un texto."
+																		minlength="1">
+																	</h:inputTextarea>
+																</div>
+																<div>
+																	<h:message styleClass="btn-sm btn-danger btn-block"
+																		for="texto" name="msgt" id="msj2"></h:message>
+																</div>
+																<h:commandButton
+																	class="btn btn-md btn btn-info  btn-block"
+																	value="Limpiar" type="reset" />
+																<h:commandButton
+																	class="btn btn-md btn-success btn-block"
+																	value="Aceptar" type="submit"
+																	action="#{emailBean.enviar()}" />
+															</h:form>
+														</p>
+														<p></p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+
+					</div>
+
+				</h:panelGroup>
+				<div>
+					<h:panelGroup rendered="#{sessionScope.tipoUsuario == null }">
+						<p>
+							Ha ocurrido un error. Por favor ingrese nuevamente sus datos.
+							<h:outputLink value="Login.xhtml"
+								rendered="#{sessionScope.tipoUsuario == null }">
+								<h:outputText value="  Ir al inicio  " />
+							</h:outputLink>
+						</p>
+					</h:panelGroup>
+				</div>
+			</div>
+
+
+
+			<p:dialog header="Mensaje" id="dialog" widgetVar="dialog"
+				fixedCenter="true" modal="true"
+				visible="#{sessionScope.vengo != null}" draggable="false"
+				resizable="false">
+				<h:outputLabel name="msg" value="#{sessionScope.mensaje}"
+					id="entrarlabel" styleClass=" btn-sm btn-danger btn-block">
+				</h:outputLabel>
+			</p:dialog>
+		</div>
+	</ui:define>
+</ui:composition>
+
+</html>

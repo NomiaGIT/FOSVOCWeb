@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="shortcut icon"
+		href="resources/images/casa2.png" type="image/x-icon" />
+	<f:facet name="first">
+		<title>Fondo Social de Vivienda de Obreros de la Construcción</title>
+
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+		<h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+		<h:outputStylesheet name="bootstrap/css/font-awesome.css" />
+		<h:outputStylesheet name="bootstrap/css/font-awesome.min.css" />
+		<f:facet name="last">
+			<h:outputStylesheet name="bootstrap/css/primefix.css" />
+		</f:facet>
+
+		<h:outputScript library="primefaces" name="jquery/jquery.js" />
+		<!-- hay que usar el jquery de primefaces no hay que cargar otro sino da error cuando carga un componente primefaces  -->
+
+
+		<h:outputScript library="js" name="qrcode.js" />
+		<h:outputScript library="js" name="bootstrap.js" />
+
+
+	</f:facet>
+	<script type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?sensor=true">
+    </script>
+
+	<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script> -->
+
+
+</h:head>
+
+<h:form>
+
+
+	<p:idleMonitor timeout="#{session.maxInactiveInterval * 1000}"
+		onidle="idleDialog.show()" />
+
+	<p:dialog closable="false" id="confirmDialog"
+		header="Su sesion se cerrará." severity="alert" widgetVar="idleDialog"
+		resizable="false" modal="true">
+		<h4>
+			<h:outputText
+				value="Ha estado inactivo por mas de 30 min, por motivos de seguridad se solicita
+                           validar sus datos nuevamente." />
+		</h4>
+
+		<p:commandButton id="Logout" value="Iniciar Sesion"
+			styleClass="btn btn-block" oncomplete="idleDialog.hide()"
+			action="#{loginBean.logout()}" />
+
+	</p:dialog>
+</h:form>
+
+
+
+
+<ui:include src="header.xhtml" />
+<h:body>
+	<ui:include src="content.xhtml" />
+</h:body>
+</html>

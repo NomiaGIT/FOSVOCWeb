@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+
+<head>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon"
+		href="resources/images/casa2.png" type="image/x-icon" />
+<title>Ingreso Autogestión</title>
+
+<!-- Core CSS - Include with every page -->
+<link href="resources/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="resources/bootstrap/css/font-awesome.css" rel="stylesheet" />
+
+
+</head>
+
+<h:body style="background-color:Lightblue">
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="header"></h1>
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<div class="login-panel panel panel-default">
+					<div class="panel-body">
+						<h3 align="center">
+							<img src="resources/images/logo.png" height="200px" style="width: 265px; height: 61px; "/>
+						</h3>
+
+					</div>
+					<div class="panel-body">
+						<h:form role="form">
+							<p:growl id="growl" showDetail="true" life="3000"
+								redisplay="false" />
+
+							<fieldset>
+								<div class="form-group">
+									Usuario
+									<h:inputText class="form-control" pt:placeholder="Usuario"
+										name="usuario" value="#{loginBean.usuario}" required="true"
+										id="usuario"
+										requiredMessage="El nombre de usuario es requerido."
+										label="Nickname"></h:inputText>
+									<h:message for="contrasena" name="msgc" id="entrarc"
+										styleClass="btn-sm btn-danger btn-block"></h:message>
+								</div>
+								<div class="form-group">
+									Clave
+									<h:inputSecret class="form-control" pt:placeholder="Contraseña"
+										name="contrasena" value="#{loginBean.contrasena}"
+										required="true" id="contrasena"
+										requiredMessage="Por favor ingrese la contraseña."
+										label="Contraseña"></h:inputSecret>
+									<h:message for="usuario" name="msgu" id="entraru"
+										styleClass="btn-sm btn-danger btn-block"></h:message>
+								</div>
+
+
+								<h:message for="entrar" name="msge" id="entrarlbl"
+									styleClass="btn-sm btn-danger btn-block">
+								</h:message>
+								<h:outputLabel for="entrar" name="msge1"
+									value="#{loginBean.msg}" id="entrarlbl1"
+									style="font-style:italic;font-weight:regular;color:#C24641;font-size:12px;">
+								</h:outputLabel>
+								<!-- Change this to a button or input when using this as a form -->
+
+								<h:commandButton value="Entrar" name="entrar" id="entrar"
+									class="btn btn-lg btn-success btn-block"
+									action="#{loginBean.validacion()}"></h:commandButton>
+							</fieldset>
+
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Core Scripts - Include with every page -->
+	<script src="resources/js/jquery-2.1.1.js"></script>
+	<script src="resources/bootstrap/js/bootstrap.min.js"></script>
+
+</h:body>
+
+</html>

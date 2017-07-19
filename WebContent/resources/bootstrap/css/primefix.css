@@ -1,0 +1,18 @@
+.ui-state-highlight,.ui-widget-content .ui-state-highlight,.ui-widget-header .ui-state-highlight
+	{
+	color: #000000;
+}
+
+.ui-selectonemenu .ui-selectonemenu-trigger {
+	width: 23px !important;
+}
+
+     
+.ui-datatable table {
+   table-layout: auto !important;
+}
+
+.ui-growl {   
+	
+    z-index:9999; 
+}

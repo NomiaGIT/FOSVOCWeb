@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+ <managed-bean>
+  <description>Login</description>
+  <managed-bean-name>loginBean</managed-bean-name>
+  <managed-bean-class>beans.LoginBean</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+  <managed-bean>
+  <description>Usuario</description>
+  <managed-bean-name>usuarioBean</managed-bean-name>
+  <managed-bean-class>beans.UsuarioBean</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+   <managed-bean>
+  <description>Aportante</description>
+  <managed-bean-name>aportanteBean</managed-bean-name>
+  <managed-bean-class>beans.AportanteBean</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <description>Email</description>
+  <managed-bean-name>emailBean</managed-bean-name>
+  <managed-bean-class>beans.EmailBean</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+
+ <!--  <navigation-rule>
+		<display-name>login</display-name>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<display-name>Inicio</display-name>
+			<to-view-id>/Inicio.xhtml</to-view-id>
+		</navigation-case>	
+		<navigation-case>
+			<display-name>login</display-name>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case> 
+	</navigation-rule> -->
+ <navigation-rule>
+  <from-view-id>/Login.xhtml</from-view-id>
+  <navigation-case>
+   <from-action>#{loginBean.validacion()}</from-action>
+   <from-outcome>Inicio</from-outcome>
+   <to-view-id>/Inicio.xhtml</to-view-id>
+   <redirect />
+  </navigation-case>
+  <navigation-case>
+   <from-action>#{loginBean.validacion()}</from-action>
+   <from-outcome>login</from-outcome>
+   <to-view-id>/Login.xhtml</to-view-id>
+   <redirect />
+  </navigation-case>
+ </navigation-rule>
+ 
+ <navigation-rule>
+  <from-view-id>/Inicio.xhtml</from-view-id>
+  <navigation-case>
+   <from-action>#{loginBean.logout()}</from-action>
+   <from-outcome>login</from-outcome>
+   <to-view-id>/Login.xhtml</to-view-id>
+  </navigation-case>  
+   <navigation-case>
+   <from-action>#{emailBean.enviar()}</from-action>
+   <from-outcome>Inicio</from-outcome>
+   <to-view-id>/Inicio.xhtml</to-view-id>
+  </navigation-case>  
+     <navigation-case>
+   <from-action>#{emailBean.enviar()}</from-action>
+   <from-outcome>SendEmail</from-outcome>
+   <to-view-id>/Inicio.xhtml</to-view-id>
+  </navigation-case> 
+ </navigation-rule>
+ 
+ <navigation-rule>
+  <from-view-id>/templates/default/header.xhtml</from-view-id>
+  <navigation-case>
+   <from-action>#{usuarioBean.logout()}</from-action>
+   <from-outcome>login</from-outcome>
+   <to-view-id>/Login.xhtml</to-view-id>
+  </navigation-case>  
+ </navigation-rule>
+ 
+ <navigation-rule>
+  <from-view-id>/Inicio.xhtml</from-view-id>
+  <navigation-case>
+   <from-action>#{usuarioBean.logout()}</from-action>
+   <from-outcome>login</from-outcome>
+   <to-view-id>/Login.xhtml</to-view-id>
+  </navigation-case>  
+ </navigation-rule>
+ 
+  <navigation-rule>
+  <from-view-id>/ModificarContrasenia.xhtml</from-view-id>
+  <navigation-case>
+   <from-action>#{usuarioBean.modificarPassword()}</from-action>
+   <from-outcome>Inicio</from-outcome>
+   <to-view-id>/Inicio.xhtml</to-view-id>
+   <redirect />
+  </navigation-case>
+  <navigation-case>
+   <from-action>#{usuarioBean.modificarPassword()}</from-action>
+   <from-outcome>Modificar</from-outcome>
+   <to-view-id>/ModificarContrasenia.xhtml</to-view-id>
+   <redirect />
+  </navigation-case>
+    <navigation-case>
+   <from-action>#{usuarioBean.cancelarModificarPassword()}</from-action>
+   <from-outcome>Inicio</from-outcome>
+   <to-view-id>/Inicio.xhtml</to-view-id>
+   <redirect />
+  </navigation-case>
+ </navigation-rule>
+ 
+ 
+
+ 
+ <application/>
+</faces-config>

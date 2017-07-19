@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#login.xhtml" PATH="/login.xhtml"
+  SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#login.xhtml:0" NAME="item"
+   PATH="/login.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="Inicio:#{loginBean.validacion()}:#Inicio.xhtml" NAME="output"
+    PATH="/Inicio.xhtml" TARGET="rules:#Inicio.xhtml"
+    TITLE="#{loginBean.validacion()}:Inicio" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="login:#{loginBean.validacion()}:#login.xhtml" NAME="output1"
+    PATH="/login.xhtml" TARGET="rules:#login.xhtml"
+    TITLE="#{loginBean.validacion()}:login" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#Inicio.xhtml" PATH="/Inicio.xhtml"
+  SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#BuscarUsuario.xhtml"
+  PATH="/BuscarUsuario.xhtml" SHAPE="32,129,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#BuscarUsuario.xhtml:0" NAME="item"
+   PATH="/BuscarUsuario.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="::#Inicio.xhtml" NAME="output"
+    PATH="/Inicio.xhtml" TARGET="rules:#Inicio.xhtml" TITLE="[any]" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:#BuscarUsuario.xhtml:1" NAME="item1"
+   PATH="/BuscarUsuario.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="ModificarNuevoUsuario::#ModificarNuevoUsuario.xhtml"
+    NAME="output" PATH="/ModificarNuevoUsuario.xhtml"
+    TARGET="rules:#ModificarNuevoUsuario.xhtml"
+    TITLE="ModificarNuevoUsuario" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:" SHAPE="48,337,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::0" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID=":#{loginBean.logOut()}:#login.xhtml"
+    NAME="output" PATH="/login.xhtml" TARGET="rules:#login.xhtml"
+    TITLE="#{loginBean.logOut()}:[any]" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#ModificarUsuario.xhtml"
+  PATH="/ModificarUsuario.xhtml" SHAPE="320,177,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#ModificarUsuario.xhtml:0" NAME="item"
+   PATH="/ModificarUsuario.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="Inicio:#{usuarioBean.getModificar()}:#Inicio.xhtml"
+    NAME="output" PATH="/Inicio.xhtml" TARGET="rules:#Inicio.xhtml"
+    TITLE="#{usuarioBean.getModificar()}:Inicio" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:#ModificarUsuario.xhtml:1" NAME="item1"
+   PATH="/ModificarUsuario.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="Inicio:#{usuarioBean.modificar()}:#Inicio.xhtml" NAME="output"
+    PATH="/Inicio.xhtml" TARGET="rules:#Inicio.xhtml"
+    TITLE="#{usuarioBean.modificar()}:Inicio" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="Modificar:#{usuarioBean.modificar()}:#ModificarUsuario.xhtml"
+    NAME="output1" PATH="/ModificarUsuario.xhtml"
+    TARGET="rules:#ModificarUsuario.xhtml"
+    TITLE="#{usuarioBean.modificar()}:Modificar" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#ModificarContrasenia.xhtml"
+  PATH="/ModificarContrasenia.xhtml" SHAPE="320,353,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#ModificarContrasenia.xhtml:0" NAME="item"
+   PATH="/ModificarContrasenia.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="Inicio:#{usuarioBean.modificarPassword()}:#Inicio.xhtml"
+    NAME="output" PATH="/Inicio.xhtml" TARGET="rules:#Inicio.xhtml"
+    TITLE="#{usuarioBean.modificarPassword()}:Inicio" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="Modificar:#{usuarioBean.modificarPassword()}:#ModificarContrasenia.xhtml"
+    NAME="output1" PATH="/ModificarContrasenia.xhtml"
+    TARGET="rules:#ModificarContrasenia.xhtml"
+    TITLE="#{usuarioBean.modificarPassword()}:Modificar" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#NuevoUsuario.xhtml"
+  PATH="/NuevoUsuario.xhtml" SHAPE="320,497,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#NuevoUsuario.xhtml:0" NAME="item"
+   PATH="/NuevoUsuario.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="Inicio:#{nuevoUsuarioBean.ingresar()}:#Inicio.xhtml"
+    NAME="output" PATH="/Inicio.xhtml" TARGET="rules:#Inicio.xhtml"
+    TITLE="#{nuevoUsuarioBean.ingresar()}:Inicio" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="NuevoUsuario:#{nuevoUsuarioBean.ingresar()}:#NuevoUsuario.xhtml"
+    NAME="output1" PATH="/NuevoUsuario.xhtml"
+    TARGET="rules:#NuevoUsuario.xhtml"
+    TITLE="#{nuevoUsuarioBean.ingresar()}:NuevoUsuario" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#ModificarNuevoUsuario.xhtml"
+  PATH="/ModificarNuevoUsuario.xhtml" SHAPE="560,161,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#ModificarNuevoUsuario.xhtml:0" NAME="item"
+   PATH="/ModificarNuevoUsuario.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="Inicio:#{nuevoUsuarioBean.modificar()}:#Inicio.xhtml"
+    NAME="output" PATH="/Inicio.xhtml" TARGET="rules:#Inicio.xhtml"
+    TITLE="#{nuevoUsuarioBean.modificar()}:Inicio" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="ModificarNuevoUsuario:#{nuevoUsuarioBean.modificar()}:#ModificarNuevoUsuario.xhtml"
+    NAME="output1" PATH="/ModificarNuevoUsuario.xhtml"
+    TARGET="rules:#ModificarNuevoUsuario.xhtml"
+    TITLE="#{nuevoUsuarioBean.modificar()}:ModificarNuevoUsuario" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#DestinoTour.xhtml" PATH="/DestinoTour.xhtml"
+  SHAPE="32,625,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#DestinoTour.xhtml:0" NAME="item"
+   PATH="/DestinoTour.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="BuscarTipoTour:#{tipoTourBean.modificarDestino()}:#BuscarTipoTour.xhtml"
+    NAME="output" PATH="/BuscarTipoTour.xhtml"
+    TARGET="rules:#BuscarTipoTour.xhtml"
+    TITLE="#{tipoTourBean.modificarDestino()}:BuscarTipoTour" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="DestinoTour:#{tipoTourBean.modificarDestino()}:#DestinoTour.xhtml"
+    NAME="output1" PATH="/DestinoTour.xhtml"
+    TARGET="rules:#DestinoTour.xhtml"
+    TITLE="#{tipoTourBean.modificarDestino()}:DestinoTour" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#BuscarTipoTour.xhtml"
+  PATH="/BuscarTipoTour.xhtml" SHAPE="256,641,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#NuevaReserva.xhtml"
+  PATH="/NuevaReserva.xhtml" SHAPE="320,353,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#NuevaReserva.xhtml:0" NAME="item"
+   PATH="/NuevaReserva.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="Inicio:#{reservaBean.ingresar()}:#Inicio.xhtml" NAME="output"
+    PATH="/Inicio.xhtml" TARGET="rules:#Inicio.xhtml"
+    TITLE="#{reservaBean.ingresar()}:Inicio" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="NuevaReserva:#{reservaBean.ingresar()}:#NuevaReserva.xhtml"
+    NAME="output1" PATH="/NuevaReserva.xhtml"
+    TARGET="rules:#NuevaReserva.xhtml"
+    TITLE="#{reservaBean.ingresar()}:NuevaReserva" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#BuscarReservasPendientes.xhtml"
+  PATH="/BuscarReservasPendientes.xhtml" SHAPE="320,929,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#BuscarReservasPendientes.xhtml:0" NAME="item"
+   PATH="/BuscarReservasPendientes.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="Inicio:#{reservaBean.aprobar()}:#Inicio.xhtml" NAME="output"
+    PATH="/Inicio.xhtml" TARGET="rules:#Inicio.xhtml"
+    TITLE="#{reservaBean.aprobar()}:Inicio" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:#BuscarReservasPendientes.xhtml:1"
+   NAME="item1" PATH="/BuscarReservasPendientes.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="Inicio:#{reservaBean.rechazar()}:#BuscarReservasPendientes.xhtml"
+    NAME="output" PATH="/BuscarReservasPendientes.xhtml"
+    TARGET="rules:#BuscarReservasPendientes.xhtml"
+    TITLE="#{reservaBean.rechazar()}:Inicio" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#NuevoConductor.xhtml"
+  PATH="/NuevoConductor.xhtml" SHAPE="320,1073,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#NuevoConductor.xhtml:0" NAME="item"
+   PATH="/NuevoConductor.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="Inicio:#{conductorBean.ingresar()}:#Inicio.xhtml" NAME="output"
+    PATH="/Inicio.xhtml" TARGET="rules:#Inicio.xhtml"
+    TITLE="#{conductorBean.ingresar()}:Inicio" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="NuevoConductor:#{conductorBean.ingresar()}:#NuevoConductor.xhtml"
+    NAME="output1" PATH="/NuevoConductor.xhtml"
+    TARGET="rules:#NuevoConductor.xhtml"
+    TITLE="#{conductorBean.ingresar()}:NuevoConductor" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#NewFile.xhtml" PATH="/NewFile.xhtml"
+  SHAPE="48,1057,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#NewFile.xhtml:0" NAME="item"
+   PATH="/NewFile.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="#Inicio:#{fileBean.ingresar()}:#Inicio.xhtml" NAME="output"
+    PATH="/Inicio.xhtml" TARGET="rules:#Inicio.xhtml"
+    TITLE="#{fileBean.ingresar()}:/Inicio" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="#NewFile:#{fileBean.ingresar()}:#NewFile.xhtml" NAME="output1"
+    PATH="/NewFile.xhtml" TARGET="rules:#NewFile.xhtml"
+    TITLE="#{fileBean.ingresar()}:/NewFile" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="NuevoConductor::#NuevoConductor.xhtml"
+    NAME="output2" PATH="/NuevoConductor.xhtml"
+    TARGET="rules:#NuevoConductor.xhtml" TITLE="NuevoConductor" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="NuevoCoche::#NuevoCoche.xhtml"
+    NAME="output3" PATH="/NuevoCoche.xhtml"
+    TARGET="rules:#NuevoCoche.xhtml" TITLE="NuevoCoche" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="NuevoGuia::#NuevoGuia.xhtml" NAME="output4"
+    PATH="/NuevoGuia.xhtml" TARGET="rules:#NuevoGuia.xhtml"
+    TITLE="NuevoGuia" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#NuevoGuia.xhtml" PATH="/NuevoGuia.xhtml"
+  SHAPE="320,1681,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#NuevoCoche.xhtml" PATH="/NuevoCoche.xhtml"
+  SHAPE="320,1569,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#BuscarFile.xhtml" PATH="/BuscarFile.xhtml"
+  SHAPE="320,1761,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#BuscarFile.xhtml:0" NAME="item"
+   PATH="/BuscarFile.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="Inicio:#{fileBean.anular()}:#Inicio.xhtml"
+    NAME="output" PATH="/Inicio.xhtml" TARGET="rules:#Inicio.xhtml"
+    TITLE="#{fileBean.anular()}:Inicio" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="BuscarFile:#{fileBean.anular()}:#BuscarFile.xhtml"
+    NAME="output1" PATH="/BuscarFile.xhtml"
+    TARGET="rules:#BuscarFile.xhtml"
+    TITLE="#{fileBean.anular()}:BuscarFile" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::1" SHAPE="48,337,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::1" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID=":#{tourBean.generar()}:#Inicio.xhtml"
+    NAME="output" PATH="/Inicio.xhtml" TARGET="rules:#Inicio.xhtml"
+    TITLE="#{tourBean.generar()}:[any]" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:composition template="/templates/default/main.xhtml">
+	<ui:define name="content">
+		<!-- Contenido del template -->
+		<p:growl id="growl" showDetail="true" life="3000" redisplay="false" />
+
+		<!-- Contenido del template -->
+		<div class="container">
+			<!-- Contenido de la pagina -->
+			<div class="row">
+			<h:panelGroup rendered="#{sessionScope.tipoUsuario != null }">
+				<div class="col-lg-12">
+					<!-- ancho del titulo-->
+					<h2 class="page-header">Usuario</h2>
+					<!-- cabezal-->
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="panel panel-danger">
+							<div class="panel-heading">
+								<h3 class="center-block">Modificación de contraseña</h3>
+							</div>
+
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-lg-4"></div>
+									<!-- Para centrar el formulario-->
+									<div class="col-lg-4">
+										<!-- form role="form" -->
+										<h:form role="form" id="myForm" class="form-horizontal">
+
+											<fieldset>
+											<!-- 	<div class="form-group">
+													<label>Nombre de Usuario:</label>
+													<H1></H1>
+													<h:outputText pt:placeholder="Usuario" name="Nick"
+														value="#{usuarioBean.usuario}"></h:outputText>
+												</div> -->
+												<div class="form-group">
+												<label>Usuario:</label>
+												<h:inputText class="form-control" pt:placeholder="Nick"
+													name="Nick" value="#{usuarioBean.usuario}" readonly="true"></h:inputText>
+											    </div>
+												<div class="form-group">
+													<label>Password Anterior:</label>
+													<h:inputSecret class="form-control"
+														value="#{usuarioBean.antiguapass}" required="true"
+														id="contrasenaant"
+														requiredMessage="Por favor ingrese la contraseña actual."
+														label="Contraseña actual" />
+													<h:message for="contrasenaant" name="msgc" id="contraant"
+														styleClass="btn-sm btn-danger btn-block"></h:message>
+												</div>
+												<div class="form-group">
+													<label>Nueva Password:</label>
+
+													<h:inputSecret class="form-control"
+														value="#{usuarioBean.nuevapass}" required="true"
+														id="contrasenanue"
+														requiredMessage="Por favor ingrese la contraseña nueva."
+														label="Contraseña nueva" />
+													<h:message for="contrasenanue" name="msgc" id="contranue"
+														styleClass="btn-sm btn-danger btn-block"></h:message>
+												</div>
+
+												<h:message for="entrar" id="msg" />
+												<div class="form-group">
+													<h:message for="entrar" name="msg"
+														value="#{usuarioBean.msgmodificarpass}" id="entrar"
+														styleClass="btn-sm btn-danger btn-block">
+													</h:message>
+												</div>
+
+												<div class="form-group">
+												<div class="col-lg-6">
+													<h:commandButton name="entrar" value="Aceptar"
+														class="btn btn-success btn-block"
+														action="#{usuarioBean.modificarPassword()}" ajax="true"
+														process="@form" update="msg" onclick="funcion()"
+														oncomplete="dialog.show()"></h:commandButton>
+												</div>		
+												<div class="col-lg-6">
+													<h:commandButton name="salir" value="Cancelar"
+														class="btn btn-primary btn-block"
+														action="#{usuarioBean.cancelarModificarPassword()}" ajax="true" immediate="true"
+														process="@form" update="msg" onclick="funcion()"
+														oncomplete="dialog.show()"></h:commandButton>
+												</div>
+												</div>
+											</fieldset>
+										</h:form>
+									</div>
+									<div class="col-lg-3"></div>
+									<!-- Para centrar el formulario -->
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			   </h:panelGroup>
+		  <div>
+				<h:panelGroup
+							rendered="#{sessionScope.tipoUsuario == null }">
+							<p>Ha ocurrido un error. Por favor ingrese nuevamente sus datos.
+						
+														<h:outputLink value="Login.xhtml"
+															rendered="#{sessionScope.tipoUsuario == null }">
+															<h:outputText value="  Ir al inicio  " />
+														</h:outputLink>
+														
+													</p>
+				</h:panelGroup>
+				</div>
+				</div>
+		</div>
+
+	</ui:define>
+</ui:composition>
+<script type="javascript"> 
+     function funcion()  
+     {  
+      var response = confirm('Está seguro que desea modificar la contraseña?');  
+     // OR var response = window.confirm('Confirm Test: Continue?');  
+  
+     if (response) parent.parent.location.href="Inicio.xhtml";  
+     else alert("No se modificarán los datos.");  
+     }  
+  </script>
+</html>
+

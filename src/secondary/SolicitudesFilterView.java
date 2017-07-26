@@ -1,5 +1,5 @@
 package secondary;
-/*
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,124 +14,93 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.primefaces.event.CellEditEvent;
-import org.primefaces.event.SelectEvent;
 
 import cliente.ClienteRest;
-import beans.TourBean;
-import datatypes.DataListaTourS;
-import datatypes.DatosTour;
+import datatypes.DataListarAdjudicaciones;
+import datatypes.DataListarSolicitudes;
 import excepciones.PersistenciaException;
-import excepciones.TourException;
 
 @SuppressWarnings("serial")
-@ManagedBean(name="tourDelDiaFilterView")
+@ManagedBean(name = "solicitudesFilterView")
 @ViewScoped
 public class SolicitudesFilterView implements Serializable {
-     
-    private List<DataListaTourS> tours;
-     
-    private List<DataListaTourS> filteredTours;
-    private List<DataListaTourS> toursAnteriores;
-    private List<DataListaTourS> toursDeUnDia;
-    private List<DataListaTourS> toursPosteriores;
-    private Date date;
-    private int cantToursDelDia;
-    private ArrayList<DatosTour> datosTourDelDia;
-     
-    @ManagedProperty("#{TourService}")
-    private TourService service;
- 
-    @PostConstruct
-    public void init() {
-   
-    	 ClienteRest cliente = ClienteRest.getInstancia();
-		 try {
-			 Calendar fecha = Calendar.getInstance();
-			tours = cliente.listarToursDelDia(fecha);
-			toursAnteriores = cliente.listarToursAnterioresA(fecha);
-			toursPosteriores = cliente.listarToursPosterioresA(fecha);
-		} catch (PersistenciaException e) {
-			
-			e.printStackTrace();
-		} catch (TourException e) {
-			
-			e.printStackTrace();
-		}
-		 
-     }
-     
-    public boolean filterByName(Object value, Object filter, Locale locale) {
-        String filterText = (filter == null) ? null : filter.toString().trim();
-        if(filterText == null||filterText.equals("")) {
-            return true;
-        }
-         
-        if(value == null) {
-            return false;
-        }
-        String val = value.toString();
-        return val.startsWith(filterText);
-    }
-   
-     public List<String> getDestinos()
-     {
-    	 List<String> tipos = new ArrayList<String>();
-    	 tipos.add("PUNTA DEL ESTE");
-    	 tipos.add("MONTEVIDEO CityTour");
-    	 tipos.add("MONTEVIDEO Caminatour");
-    	 tipos.add("COLONIA");
-    	 tipos.add("MINAS");
-    	 tipos.add("BODEGA"); 		
-    	 return tipos;
-     }
-     public List<String> getDias(){
-    	 List<String> tipos = new ArrayList<String>();
-    	 tipos.add("Lunes");
-    	 tipos.add("Martes");
-    	 tipos.add("Miercoles");
-    	 tipos.add("Jueves");
-    	 tipos.add("Viernes");
-    	 tipos.add("Sabado");
-    	 tipos.add("Domingo");
-    	 
-    	 return tipos;
-     }
-    public void onCellEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-         
-        if(newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
-    }
-	 
-    public void setService(TourService service) {
-        this.service = service;
-    }
+	private List<DataListarSolicitudes> solicitudes;
+	private List<DataListarSolicitudes> solicitudesActivasDeAportante;
+	private List<DataListarSolicitudes> filteredSolicitudes;
+	private int cantSolicitudesActivasDe;
+	private int cantAdjudicacionesDe;
+	private List<DataListarAdjudicaciones> adjudicaciones;
+	private List<DataListarAdjudicaciones> adjudicacionesActivasDeAportante;
+	private List<DataListarAdjudicaciones> filteredAdjudicaciones;
 
-	public List<DataListaTourS> getTours() {
-		try {
+	@ManagedProperty("#{SolicitudService}")
+	private SolicitudService service;
+
+	@PostConstruct
+	public void init() {
 		ClienteRest cliente = ClienteRest.getInstancia();
-		Calendar fecha = Calendar.getInstance();
-		
-			tours = cliente.listarToursDelDia(fecha);
+		try {
+			int cedula = (Integer) ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getSession().getAttribute("idUsuario");
+			solicitudesActivasDeAportante = cliente.listarSolicitudesActivasDe(cedula);
+			cantSolicitudesActivasDe = solicitudesActivasDeAportante.size();
+						
+			adjudicacionesActivasDeAportante = cliente.listarAdjudicacionesDe(cedula);
+			cantAdjudicacionesDe = adjudicacionesActivasDeAportante.size();
+			
 		} catch (PersistenciaException e) {
-			
-			e.printStackTrace();
-		} catch (TourException e) {
-			
 			e.printStackTrace();
 		}
-		return tours;
 	}
 
-	public void setTours(List<DataListaTourS> tours) {
-		this.tours = tours;
+	public boolean filterByName(Object value, Object filter, Locale locale) {
+		String filterText = (filter == null) ? null : filter.toString().trim();
+		if (filterText == null || filterText.equals("")) {
+			return true;
+		}
+
+		if (value == null) {
+			return false;
+		}
+		String val = value.toString();
+		return val.startsWith(filterText);
 	}
 
+	public void onCellEdit(CellEditEvent event) {
+		Object oldValue = event.getOldValue();
+		Object newValue = event.getNewValue();
+
+		if (newValue != null && !newValue.equals(oldValue)) {
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+		}
+	}
+
+	public void setService(SolicitudService service) {
+		this.service = service;
+	}
+
+	public List<DataListarSolicitudes> getSolicitudesActivasDeAportante() {
+		/*try {
+			ClienteRest cliente = ClienteRest.getInstancia();
+			faceContext = FacesContext.getCurrentInstance();
+			httpServletRequest = (HttpServletRequest) faceContext.getExternalContext().getRequest();
+			int cedula = (Integer) httpServletRequest.getSession().getAttribute("idUsuario");
+			solicitudesActivasDeAportante = cliente.listarSolicitudesActivasDe(cedula);
+			cantSolicitudesActivasDe = solicitudesActivasDeAportante.size();
+		} catch (PersistenciaException e) {
+
+			e.printStackTrace();
+		}*/
+		return solicitudesActivasDeAportante;
+	}
+
+	public void setSolicitudesActivasDeAportante(List<DataListarSolicitudes> sol) {
+		this.solicitudesActivasDeAportante = sol;
+	}
+/*
 	public List<DataListaTourS> getFilteredTours() {
 		return filteredTours;
 	}
@@ -261,5 +230,61 @@ public class SolicitudesFilterView implements Serializable {
 
 	public void setDatosTourDelDia(ArrayList<DatosTour> datosTourDelDia) {
 		this.datosTourDelDia = datosTourDelDia;
+	}*/
+
+	public List<DataListarSolicitudes> getFilteredSolicitudes() {
+		return filteredSolicitudes;
 	}
-}*/
+
+	public void setFilteredSolicitudes(List<DataListarSolicitudes> filteredSolicitudes) {
+		this.filteredSolicitudes = filteredSolicitudes;
+	}
+
+	public int getCantSolicitudesActivasDe() {
+		return cantSolicitudesActivasDe;
+	}
+
+	public void setCantSolicitudesActivasDe(int cantSolicitudesActivasDe) {
+		this.cantSolicitudesActivasDe = cantSolicitudesActivasDe;
+	}
+
+	public List<DataListarSolicitudes> getSolicitudes() {
+		return solicitudes;
+	}
+
+	public void setSolicitudes(List<DataListarSolicitudes> solicitudes) {
+		this.solicitudes = solicitudes;
+	}
+
+	public int getCantAdjudicacionesDe() {
+		return cantAdjudicacionesDe;
+	}
+
+	public void setCantAdjudicacionesDe(int cantAdjudicacionesDe) {
+		this.cantAdjudicacionesDe = cantAdjudicacionesDe;
+	}
+
+	public List<DataListarAdjudicaciones> getAdjudicaciones() {
+		return adjudicaciones;
+	}
+
+	public void setAdjudicaciones(List<DataListarAdjudicaciones> adjudicaciones) {
+		this.adjudicaciones = adjudicaciones;
+	}
+
+	public List<DataListarAdjudicaciones> getAdjudicacionesActivasDeAportante() {
+		return adjudicacionesActivasDeAportante;
+	}
+
+	public void setAdjudicacionesActivasDeAportante(List<DataListarAdjudicaciones> adjudicacionesActivasDeAportante) {
+		this.adjudicacionesActivasDeAportante = adjudicacionesActivasDeAportante;
+	}
+
+	public List<DataListarAdjudicaciones> getFilteredAdjudicaciones() {
+		return filteredAdjudicaciones;
+	}
+
+	public void setFilteredAdjudicaciones(List<DataListarAdjudicaciones> filteredAdjudicaciones) {
+		this.filteredAdjudicaciones = filteredAdjudicaciones;
+	}
+}

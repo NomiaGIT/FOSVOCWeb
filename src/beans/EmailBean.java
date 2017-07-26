@@ -38,7 +38,18 @@ public class EmailBean {
 				{
 					emailremitente = du.getMail();
 					remitente = du.getNombres()+" "+du.getApellidos();
-					EnviarMail.enviarmail(asunto, textomensaje, remitente, emailremitente);
+					boolean ok = EnviarMail.enviarmail(asunto, textomensaje, remitente, emailremitente);
+					if(ok)
+					{
+						String enviar = "Se envió el correo a Fosvoc.";
+						facesMessage=new FacesMessage(FacesMessage.SEVERITY_INFO, "Mensaje:", enviar);					
+						faceContext.addMessage(null, facesMessage);						
+					}else
+					{
+						String enviar = "No fue posible enviar el correo a Fosvoc.";
+						facesMessage=new FacesMessage(FacesMessage.SEVERITY_ERROR, "Mensaje:", enviar);					
+						faceContext.addMessage(null, facesMessage);
+					}
 					mensaje = "Inicio";
 				}
 				else 

@@ -5,11 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
 import java.util.Scanner;
 
 import org.apache.log4j.Logger;
-import org.json.JSONArray;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -112,9 +110,7 @@ public class Servicios {
 			url = new URL(strUrl);
 			String output = null;
 			conn = (HttpURLConnection) url.openConnection();
-
 			conn.setRequestMethod(metodo);
-
 			conn.setRequestProperty("Content-Type", "application/json");
 			output = getResponseText(conn.getInputStream());// ESTO OBTIENE EL
 															// OBJETO
@@ -215,6 +211,55 @@ public class Servicios {
 					"Failed : IOException al consumir el WS");
 		}
 	}
+	public static String ejecutarServicioListarSolicitudes(final String strUrl,
+			final String metodo) throws PersistenciaException {
+		HttpURLConnection conn = null;
+		try {
+			URL url;
+			url = new URL(strUrl);
+			conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod(metodo);
+			conn.setRequestProperty("Content-Type", "application/json");
+			if (conn.getResponseCode() != 200) {
+				final Exception ex = new Exception(
+						"Failed : HTTP error code : " + conn.getResponseCode());
+				throw new PersistenciaException(ex.getMessage());
+			}
 
+			final String output = getResponseText(conn.getInputStream());// ESTO OBTIENE EL OBJETO
+																			// LIST DE RESPUESTA A LA
+																			// CONSULTA AL WS
+			return output;
+		} catch (final IOException ex) {System.out.println(ex.getMessage());
+			LOG.error(ex);
+			throw new PersistenciaException(
+					"Failed : IOException al consumir el WS");
+		}
+	}
+	public static String ejecutarServicioListarAdjudicaciones(final String strUrl,
+			final String metodo) throws PersistenciaException {
+		HttpURLConnection conn = null;
+		try {
+			URL url;
+			url = new URL(strUrl);
+			conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod(metodo);
+			conn.setRequestProperty("Content-Type", "application/json");
+			if (conn.getResponseCode() != 200) {
+				final Exception ex = new Exception(
+						"Failed : HTTP error code : " + conn.getResponseCode());
+				throw new PersistenciaException(ex.getMessage());
+			}
+
+			final String output = getResponseText(conn.getInputStream());// ESTO OBTIENE EL OBJETO
+																			// LIST DE RESPUESTA A LA
+																			// CONSULTA AL WS
+			return output;
+		} catch (final IOException ex) {System.out.println(ex.getMessage());
+			LOG.error(ex);
+			throw new PersistenciaException(
+					"Failed : IOException al consumir el WS");
+		}
+	}
 	
 }

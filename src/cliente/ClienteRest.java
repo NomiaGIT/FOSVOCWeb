@@ -1,26 +1,29 @@
 package cliente;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Vector;
+
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
-
 
 import com.google.gson.Gson;
 
 import datatypes.DataAportante;
 import datatypes.DataContrasenia;
+import datatypes.DataListarAdjudicaciones;
+import datatypes.DataListarSolicitudes;
 import datatypes.DataLoginIn;
-
 import datatypes.DataMensaje;
-
 import datatypes.DataUsuario;
 import datatypes.DataUsuarioLogin;
 import datatypes.response.DataAportanteResponse;
+import datatypes.response.DataListarAdjudicacionesResponse;
+import datatypes.response.DataListarSolicitudesResponse;
 import datatypes.response.DataUsuarioLoginResponse;
 import datatypes.response.DataUsuarioResponse;
 import excepciones.PersistenciaException;
 import utilitarios.EnviarMail;
-
-
 /**
  * @description: Cliente para consumir servicios rest.
  *               Se utiliza el patrón singleton para mantener una única
@@ -179,5 +182,76 @@ public void enviarMail(String asunto, String mensaje, String remitente, String m
 {
 	EnviarMail.enviarmail(asunto, mensaje, remitente, mailremitente);
 }
-
+public List<DataListarSolicitudes> listarSolicitudesActivasDe(int cedula) throws PersistenciaException {
+	DataListarSolicitudesResponse resource=null;
+	Vector<DataListarSolicitudes> listaAux = new Vector<DataListarSolicitudes>();
+	List<DataListarSolicitudes> lista = new LinkedList<DataListarSolicitudes>();
+	 Gson gson=new Gson();
+	  	try {	  		
+			String url= urlRestService+lector.getServicioSolicitudesActivasDeAportante()+cedula;				
+			final String output = Servicios.ejecutarServicioListarSolicitudes(url, GET);//sigo con el mismo servicio, ya que no hay que pasar parametros
+			if(output != null && !output.isEmpty())
+			{
+				resource = gson.fromJson(output, DataListarSolicitudesResponse.class);					
+				if(resource != null)
+				{
+					DataMensaje dm = resource.getDm();
+					if(dm != null)
+					{
+						boolean ok = dm.isOk();
+						if(ok)
+						{								
+							listaAux = resource.getDatos();
+							for(DataListarSolicitudes dl : listaAux)
+							{									        	
+					        	lista.add(dl);					
+							}
+						}						
+					}
+				}	
+			}
+			else
+				throw new PersistenciaException("No se encuentran solicitudes activas para este aportante.");		
+		} 
+		catch (PersistenciaException e) {
+			throw new PersistenciaException(e.getMensaje());
+		} 	
+		return lista;
+}
+public List<DataListarAdjudicaciones> listarAdjudicacionesDe(int cedula) throws PersistenciaException {
+	DataListarAdjudicacionesResponse resource=null;
+	Vector<DataListarAdjudicaciones> listaAux = new Vector<DataListarAdjudicaciones>();
+	List<DataListarAdjudicaciones> lista = new LinkedList<DataListarAdjudicaciones>();
+	 Gson gson=new Gson();
+	  	try {	  		
+			String url= urlRestService+lector.getServicioAdjudicacionesDeAportante()+cedula;				
+			final String output = Servicios.ejecutarServicioListarAdjudicaciones(url, GET);//sigo con el mismo servicio, ya que no hay que pasar parametros
+			if(output != null && !output.isEmpty())
+			{
+				resource = gson.fromJson(output, DataListarAdjudicacionesResponse.class);					
+				if(resource != null)
+				{
+					DataMensaje dm = resource.getDm();
+					if(dm != null)
+					{
+						boolean ok = dm.isOk();
+						if(ok)
+						{								
+							listaAux = resource.getDatos();
+							for(DataListarAdjudicaciones dl : listaAux)
+							{									        	
+					        	lista.add(dl);					
+							}
+						}						
+					}
+				}	
+			}
+			else
+				throw new PersistenciaException("No se encuentran adjudicaciones activas para este aportante.");		
+		} 
+		catch (PersistenciaException e) {
+			throw new PersistenciaException(e.getMensaje());
+		} 	
+		return lista;
+}
 }

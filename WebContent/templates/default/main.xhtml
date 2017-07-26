@@ -51,17 +51,16 @@
 
 	<p:dialog closable="false" id="confirmDialog"
 		header="Su sesion se cerrará." severity="alert" widgetVar="idleDialog"
-		resizable="false" modal="true">
+		resizable="false" modal="true"
+		style="width:50% !important; height:40% !important; top:25% !important; left: 30% !important;">
 		<h4>
 			<h:outputText
-				value="Ha estado inactivo por mas de 30 min, por motivos de seguridad se solicita
-                           validar sus datos nuevamente." />
+				value=" Ha estado inactivo por mas de 30 min, por motivos de seguridad se solicita
+                           ingresar sus datos nuevamente." />
 		</h4>
-
 		<p:commandButton id="Logout" value="Iniciar Sesion"
-			styleClass="btn btn-block" oncomplete="idleDialog.hide()"
+			styleClass="btn btn-md" oncomplete="idleDialog.hide()"
 			action="#{loginBean.logout()}" />
-
 	</p:dialog>
 </h:form>
 

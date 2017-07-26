@@ -40,9 +40,49 @@
   <param-name>servicioModificarContrasenia</param-name>
   <param-value>usuario/set_pass</param-value>
  </context-param>
+    <context-param>
+  <param-name>servicioSolicitudesActivasDeAportante</param-name>
+  <param-value>solicitud/getActiveFrom/</param-value>
+ </context-param>
+  <context-param>
+  <param-name>servicioSolicitudesDeAportante</param-name>
+  <param-value>solicitud/getAllFrom/</param-value>
+ </context-param>
+  <context-param>
+  <param-name>servicioListarSolicitudes</param-name>
+  <param-value>solicitud/getAll</param-value>
+ </context-param>
+  <context-param>
+  <param-name>servicioGetSolicitud</param-name>
+  <param-value>solicitud/</param-value>
+ </context-param>
+ <context-param>
+  <param-name>servicioAdjudicacionesDeAportante</param-name>
+  <param-value>prestamo/getAllFrom/</param-value>
+ </context-param>
+ <context-param>
+  <param-name>servicioListarAdjudicaciones</param-name>
+  <param-value>prestamo/getAll</param-value>
+ </context-param>
+  <context-param>
+  <param-name>servicioGetAdjudicacion</param-name>
+  <param-value>prestamo/</param-value>
+ </context-param>
  <context-param>
   <param-name>urlWS</param-name>
   <param-value>http://localhost:8080/FOSVOCWS/</param-value>
+ </context-param>
+ <context-param>
+  <param-name>cuentaEmail</param-name>
+  <param-value>soledad@i3.com.uy</param-value>
+ </context-param>
+  <context-param>
+  <param-name>passwordEmail</param-name>
+  <param-value>sole.fosvoc</param-value>
+ </context-param>
+  <context-param>
+  <param-name>cuentaEmailDestino</param-name>
+  <param-value>soledad@nomia.com.uy</param-value>
  </context-param>
  <listener>
   <listener-class>com.sun.faces.config.ConfigureListener</listener-class>

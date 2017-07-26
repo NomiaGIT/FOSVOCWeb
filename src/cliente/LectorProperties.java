@@ -9,6 +9,13 @@ public class LectorProperties {
 	private String servicioGetUsuario;
 	private String servicioGetAportante;
 	private String servicioModificarContrasenia;
+	private String servicioSolicitudesActivasDeAportante;
+	private String servicioSolicitudesDeAportante;
+	private String servicioListarSolicitudes;
+	private String servicioGetSolicitud;
+	private String servicioAdjudicacionesDeAportante;
+	private String servicioListarAdjudicaciones;
+	private String servicioGetAdjudicacion;
 
 	public LectorProperties() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -23,6 +30,14 @@ public class LectorProperties {
 				"servicioGetAportante");
 		servicioModificarContrasenia = (String) context.getExternalContext().getInitParameter(
 				"servicioModificarContrasenia");
+		servicioSolicitudesActivasDeAportante = (String) context.getExternalContext().getInitParameter("servicioSolicitudesActivasDeAportante");
+		servicioSolicitudesDeAportante = (String) context.getExternalContext().getInitParameter("servicioSolicitudesDeAportante");
+		servicioListarSolicitudes = (String) context.getExternalContext().getInitParameter("servicioListarSolicitudes");
+		servicioGetSolicitud = (String) context.getExternalContext().getInitParameter("servicioGetSolicitud");
+		servicioGetAdjudicacion = (String) context.getExternalContext().getInitParameter("servicioGetAdjudicacion");
+		servicioListarAdjudicaciones = (String) context.getExternalContext().getInitParameter("servicioListarAdjudicaciones");
+		servicioAdjudicacionesDeAportante = (String) context.getExternalContext().getInitParameter("servicioAdjudicacionesDeAportante");
+		
 	}
 
 	public String getUrl() {
@@ -45,10 +60,6 @@ public class LectorProperties {
 		return servicioLogin;
 	}
 
-	public void setServicioLogin(String servicioLogin) {
-		this.servicioLogin = servicioLogin;
-	}
-
 	public String getServicioGetUsuario() {
 		return servicioGetUsuario;
 	}
@@ -60,6 +71,39 @@ public class LectorProperties {
 	public String getServicioModificarContrasenia() {
 		return servicioModificarContrasenia;
 	}
+
+	public String getServicioSolicitudesActivasDeAportante() {
+		return servicioSolicitudesActivasDeAportante;
+	}
+
+	public String getServicioSolicitudesDeAportante() {
+		return servicioSolicitudesDeAportante;
+	}
+
+	public String getServicioListarSolicitudes() {
+		return servicioListarSolicitudes;
+	}
+
+	public void setServicioListarSolicitudes(String servicioListarSolicitudes) {
+		this.servicioListarSolicitudes = servicioListarSolicitudes;
+	}
+
+	public String getServicioGetSolicitud() {
+		return servicioGetSolicitud;
+	}
+
+	public String getServicioAdjudicacionesDeAportante() {
+		return servicioAdjudicacionesDeAportante;
+	}
+
+	public String getServicioListarAdjudicaciones() {
+		return servicioListarAdjudicaciones;
+	}
+
+	public String getServicioGetAdjudicacion() {
+		return servicioGetAdjudicacion;
+	}
+
 
 
 }

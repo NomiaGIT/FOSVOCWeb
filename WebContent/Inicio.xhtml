@@ -14,7 +14,7 @@
 
 		<div class="container">
 			<div class="row">
-				<h3></h3>
+				<h3 />
 				<div class="col-lg-12">
 					<h:panelGroup rendered="#{sessionScope.tipoUsuario != null }">
 						<h3 class="page-header">
@@ -48,35 +48,39 @@
 								<!-- Tab panes -->
 								<div class="tab-content">
 									<div class="tab-pane fade in active" id="iniciotab">
-										<h3></h3>
+										<h3 />
 										<div class="row">
 											<div class="col-lg-12 ">
 												<div class="panel panel-info">
+													<div />
 													<div>
 														<h:outputText
 															value="A través de las opciones usted podrá consultar información sobre sus préstamos. " />
 														<a href="#prestamos" data-toggle="tab"><i
-															class="fa fa-info fa-fw" aria-hidden="true"></i></a>
+															class="fa fa-info fa-fw" aria-hidden="true" /></a>
 													</div>
+													<div />
 													<div>
 														<h:outputText
 															value="Consultar y confirmar sus datos personales. " />
 														<a href="#perfil" data-toggle="tab"><i
-															class="fa fa-user-o fa-fw" aria-hidden="true"></i></a>
+															class="fa fa-user-o fa-fw" aria-hidden="true" /></a>
 													</div>
+													<div />
 													<div>
 														<h:outputText
 															value="Enviar un mensaje a la administración del Fondo de vivienda. " />
 														<a href="#contacto" data-toggle="tab"><i
-															class="fa fa-envelope-o fa-fw" aria-hidden="true"></i></a>
+															class="fa fa-envelope-o fa-fw" aria-hidden="true" /></a>
 													</div>
+													<div />
 												</div>
 											</div>
 										</div>
 									</div>
 									<!-- Inicio panel de informacion personal -->
 									<div class="tab-pane fade" id="perfil">
-										<h3></h3>
+										<h3 />
 										<div class="row">
 											<div class="col-lg-12 ">
 												<div class="panel panel-info">
@@ -133,7 +137,7 @@
 															id="entrarlbl1"
 															style="font-style:italic;font-weight:regular;color:#003366;" />
 														<a href="#contacto" data-toggle="tab"><i
-															class="fa fa-envelope-o fa-fw" aria-hidden="true"></i>
+															class="fa fa-envelope-o fa-fw" aria-hidden="true" />
 															Contacto</a>
 													</div>
 												</div>
@@ -155,15 +159,51 @@
 										<div class="row">
 											<div>
 												<div class="thumbnail">
-													<i class="fa fa-address-card-o" aria-hidden="true"></i>
 													<div class="caption">
 														<div>
-															<h:outputText
-																value=" Tours: #{tourDelDiaFilterView.datosTourDelDia.get(0).cuantos} para #{tourDelDiaFilterView.datosTourDelDia.get(0).destino}"
-																rendered="#{tourDelDiaFilterView.datosTourDelDia.get(0).cuantos &gt;0}" />
 															<h:outputText value=" No hay solicitudes pendientes "
-																rendered="#{solicitudesFilterView.datosSolicitudDeAportante.cuantas == 0}" />
+																rendered="#{solicitudesFilterView.cantSolicitudesActivasDe == 0}" />
 														</div>
+														<!-- DESDE AQUI LA TABLA -->
+														<div class="col-lg-12">
+															<!-- ancho del contenedor-->
+															<h:form id="form"
+																rendered="#{solicitudesFilterView.cantSolicitudesActivasDe > 0}">
+																<p:growl id="msgs" showDetail="true" redisplay="false" />
+																															
+																<p:dataTable id="tbl" var="DataListaSol"
+																	rowKey="#{DataListaSol.numeroSolicitud}"
+																	value="#{solicitudesFilterView.solicitudesActivasDeAportante}"
+																	widgetVar="TTable"
+																	emptyMessage="No se encuentran solicitudes con ese criterio de búsqueda"
+																	filteredValue="#{solicitudesFilterView.filteredSolicitudes}"
+																	rows="20"
+																	resizableColumns="true">
+
+																	<p:column headerText="Identificador" >
+																		<h:outputText value="#{DataListaSol.numeroSolicitud}" />
+																	</p:column>
+
+																	<p:column headerText="Documento">
+																		<h:outputText value="#{DataListaSol.documento}" />
+																	</p:column>
+
+																	<p:column headerText="Nombre">
+																		<h:outputText value="#{DataListaSol.nombre}" />
+																	</p:column>
+
+																	<p:column headerText="Apellido">
+																		<h:outputText value="#{DataListaSol.apellido}" />
+																	</p:column>
+
+																	<p:column headerText="Estado">
+																		<h:outputText value="#{DataListaSol.estado}" />
+																	</p:column>
+																</p:dataTable>
+															</h:form>
+
+														</div>
+														<!-- HASTA AQUI LA TABLA -->
 													</div>
 												</div>
 											</div>
@@ -171,10 +211,70 @@
 										<div class="alert alert-info">
 											<h:outputText value="Adjudicaciones activas" />
 										</div>
+										<!--  DESDE AQUI LA INFO DE ADJUDICACIONES -->
+										<div class="row">
+											<div>
+												<div class="thumbnail">
+													<div class="caption">
+														<div style="width: 1114px; ">
+															<h:outputText value=" No hay adjudicaciones para este aportante "
+																rendered="#{solicitudesFilterView.cantAdjudicacionesDe == 0}" />
+														</div>
+														<!-- DESDE AQUI LA TABLA -->
+														<div class="col-lg-12" >
+															<!-- ancho del contenedor-->
+															<h:form id="formA"
+																rendered="#{solicitudesFilterView.cantAdjudicacionesDe > 0}">														
+																	
+																<p:dataTable id="tblA" var="DataListaAdj"
+																	rowKey="#{DataListaAdj.numeroSolicitud}"
+																	value="#{solicitudesFilterView.adjudicacionesActivasDeAportante}"
+																	widgetVar="TTableA"																																																		
+																	resizableColumns="true">
 
+																	<p:column headerText="Solicitud Nº" >
+																		<h:outputText value="#{DataListaAdj.numeroSolicitud}" />
+																	</p:column>
+																	<p:column headerText="Fecha adjudicación">
+																		<h:outputText value="#{DataListaAdj.fechaAprobacion}" />
+																	</p:column>		
+																	<p:column headerText="Estado">
+																		<h:outputText value="#{DataListaAdj.estado}" />
+																	</p:column>
+																	<p:column headerText="Monto">
+																		<h:outputText value="#{DataListaAdj.montoEnPesos}" />
+																	</p:column>
+																	<p:column headerText="Detalles">																		
+																		<h:outputLink value="DetalleAdjudicacion.xhtml">
+																			<h:outputText styleClass="fa fa-search-plus fa-fw" />
+																			<f:param name="idS"
+																				value="#{DataListaAdj.numeroSolicitud}" />
+																		</h:outputLink>
+																	</p:column>
+
+																	<!-- 	<p:columnGroup type="header">
+      <p:column headerText="Numero solicitud" />
+      <p:column headerText="Fecha adjudicacion" styleClass="text-left"/>
+      <p:column headerText="Estado" styleClass="text-right"/>
+      <p:column headerText="Monto" styleClass="text-center"/>
+    </p:columnGroup>
+    <p:column>#{DataListaAdj.numeroSolicitud}</p:column>
+    <p:column>#{DataListaAdj.fechaAprobacion}</p:column>
+    <p:column>#{DataListaAdj.estado}</p:column>
+    <p:column>#{DataListaAdj.montoEnPesos}</p:column> -->
+																</p:dataTable>
+															</h:form>
+
+														</div>
+														<!-- HASTA AQUI LA TABLA -->
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- hasta aqui la parte de adjudicaciones -->
 									</div>
 									<div class="tab-pane fade" id="contacto">
-										<h3></h3>
+										<h3 />
 										<div class="row">
 											<div class="col-lg-12 ">
 												<div class="panel panel-info">
@@ -187,37 +287,48 @@
 																	<label>Asunto:</label>
 																	<h:inputText class="form-control"
 																		pt:placeholder="Asunto" name="Asunto"
-																		value="#{emailBean.asunto}" id="asunto" label="Asunto">
-																	</h:inputText>
+																		value="#{emailBean.asunto}" id="asunto" label="Asunto" />
+
 																</div>
 																<div>
 																	<h:message styleClass="btn-sm btn-danger btn-block"
-																		for="asunto" name="msgc" id="msj1"></h:message>
+																		for="asunto" name="msgc" id="msj1" />
 																</div>
 																<div class="form-group">
 																	<label>Texto:</label>
-																	<h:inputTextarea  
-																		value="#{emailBean.textomensaje}" required="true"
-																		id="texto" class="form-control"
+																	<h:inputTextarea value="#{emailBean.textomensaje}"
+																		required="true" id="texto" class="form-control"
 																		requiredMessage="Por favor ingrese el texto del mensaje"
 																		validatorMessage="El mensaje debe contener un texto."
-																		minlength="1">
-																	</h:inputTextarea>
+																		minlength="1" />
+
 																</div>
 																<div>
 																	<h:message styleClass="btn-sm btn-danger btn-block"
-																		for="texto" name="msgt" id="msj2"></h:message>
+																		for="texto" name="msgt" id="msj2" />
 																</div>
-																<h:commandButton
-																	class="btn btn-md btn btn-info  btn-block"
-																	value="Limpiar" type="reset" />
+															
+																
+																<div class = "row">
+																<div class="col-md-4">
+                                                                <h:commandButton
+																	class="btn btn-md btn btn-info btn-block"
+																	value="Limpiar" type="reset" 
+																	/>
+																</div>
+																<div class="col-md-4">
 																<h:commandButton
 																	class="btn btn-md btn-success btn-block"
 																	value="Aceptar" type="submit"
-																	action="#{emailBean.enviar()}" />
+																	action="#{emailBean.enviar()}" 
+																	/>    
+																   </div>    
+																   </div>              
+                                                                		
+                                                               											
 															</h:form>
 														</p>
-														<p></p>
+														<p />
 													</div>
 												</div>
 											</div>
@@ -225,12 +336,8 @@
 									</div>
 								</div>
 							</div>
-
-
 						</div>
-
 					</div>
-
 				</h:panelGroup>
 				<div>
 					<h:panelGroup rendered="#{sessionScope.tipoUsuario == null }">
@@ -252,8 +359,7 @@
 				visible="#{sessionScope.vengo != null}" draggable="false"
 				resizable="false">
 				<h:outputLabel name="msg" value="#{sessionScope.mensaje}"
-					id="entrarlabel" styleClass=" btn-sm btn-danger btn-block">
-				</h:outputLabel>
+					id="entrarlabel" styleClass=" btn-sm btn-danger btn-block" />
 			</p:dialog>
 		</div>
 	</ui:define>
